@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio HTML Player</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: url('https://i.gifer.com/xK.gif') no-repeat center center fixed; 
+            background-size: cover;
+            margin: 0;
+        }
+        .player {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 2%;
+            max-width: 50%; /* Definindo a largura máxima como 80% da largura da tela */
+            box-sizing: border-box;
+            margin: auto; /* Centralizando o player na tela */
+        }
+        #clock {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        #sourceList {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        #sourceList .audiosource {
+            background-color: lightgray;
+            border: 0.25em solid gray;
+            margin: 1%;
+            padding: 1%;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #sourceList .audiosource.selected {
+            border: 0.25em solid black;
+            background-color: lightblue;
+        }
+        #sourceList .audiosource.selected.paused {
+            background-color: lightyellow;
+        }
+        .player-controls {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4%;
+        }
+        .player-controls .button {
+            display: inline-block;
+            border: 0.25em solid gray;
+            padding: 0.5%;
+            margin: 0.5%;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 30%; /* Definindo a largura dos botões */
+        }
+    </style>
+</head>
+<body>
+    <div class="player">
+        <div id="clock"></div>
+        <audio id="audioElement">
+            HTML5 audio not supported.
+        </audio>
+        <div class="player-controls">
+            <div id="playButton" class="button"><i class="fa fa-play"></i>&nbsp;Play</div>
+            <div id="pauseButton" class="button"><i class="fa fa-pause"></i>&nbsp;Pause</div>
+            <div id="stopButton" class="button"><i class="fa fa-stop"></i>&nbsp;Stop</div>
+        </div>
+        <div class="player-sources">
+            <ul id="sourceList">
+                <li class="HQ audiosource" data-src="https://streaming.brol.tech/jamendolounge">Vibe Song <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="https://casthttps.suaradionanet.net/13805/stream">Reggae <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="https://hirschmilch.de:7000/psytrance.mp3">Psy Trance <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="http://94.130.113.214:8000/prog">Prog <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="http://schranz.in:8000/stream/1/">HARDTECHNO <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="http://116.202.241.212:7015/stream/1/">Classical <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="http://gr02.cdnstream.com:8170/">Rap <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="http://51.255.235.165:5068/stream/1/">Jazz <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="http://108.178.13.122:8195/stream/1/">Hip-Hop <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="http://5.35.214.196:8000/stream/1/">Indie <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="https://solid9.streamupsolutions.com/proxy/aceycmcz?mp=/stream">Reggae 2 <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="https://sc.bce.lu/eldo">Top Music <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="http://fr.ah.fm:8000/stream/1/">Trance 2 <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="http://173.208.177.90:9322/stream/1/">HardRock <span style="color:#109010">(Online)</span></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var day = now.getDate();
+            var month = now.getMonth() + 1; // January is 0
+            var year = now.getFullYear();
+            if (hours < 10) hours = '0' + hours;
+            if (minutes < 10) minutes = '0' + minutes;
+            if (seconds < 10) seconds = '0' + seconds;
+            if (day < 10) day = '0' + day;
+            if (month < 10) month = '0' + month;
+            var timeString = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+            document.getElementById('clock').innerHTML = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        $(".audiosource").on('click', function() {
+            $("#sourceList .audiosource").removeClass("selected");
+            $(this).addClass("selected");
+            $("#audioElement").attr("src", $(this).data("src")).get(0).play();
+        });
+        $("#playButton").on('click', function() {
+            $("#audioElement").get(0).play();
+            $("#sourceList .audiosource.selected").removeClass('paused');
+        });
+        $("#pauseButton").on('click', function() {
+            $("#audioElement").get(0).pause();
+            $("#sourceList .audiosource.selected").addClass('paused');
+        });
+        $("#stopButton").on('click', function() {
+            $("#audioElement").get(0).pause();
+            $("#audioElement").get(0).src = "";
+            $("#sourceList .audiosource").removeClass("selected").removeClass('paused');
+        });
+    </script>
+</body>
+</html>
