@@ -35,4 +35,5 @@ Este projeto foi desenvolvido por [zBLACKHAT](https://github.com/Hacker666EXE) e
 - jQuery (versão 2.1.4)
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
-![Radio HTML Player](Player-HTML.png)
+
+![Radio HTML Player](https://raw.githubusercontent.com/Hacker666EXE/Radio-HTML-Player/main/Player%20HTML.png)
