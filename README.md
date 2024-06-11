@@ -17,7 +17,7 @@ Este projeto consiste em um player de rádio HTML que suporta várias estações
 ## Como usar
 
 Basta abrir o arquivo index.html em um navegador da web compatível para começar a usar o player de rádio. Clique em uma estação de rádio na lista de fontes para reproduzir a transmissão de áudio correspondente. Use os botões de controle (play, pause e stop) para controlar a reprodução de áudio.
-![Radio HTML Player](Player HTML.png)
+
 
 ## Tecnologias Utilizadas
 
@@ -35,3 +35,4 @@ Este projeto foi desenvolvido por [zBLACKHAT](https://github.com/Hacker666EXE) e
 - jQuery (versão 2.1.4)
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
+![Radio HTML Player](Player-HTML.png)
