@@ -18,9 +18,9 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 2%;
-            max-width: 50%; /* Definindo a largura máxima como 80% da largura da tela */
+            max-width: 50%;
             box-sizing: border-box;
-            margin: auto; /* Centralizando o player na tela */
+            margin: auto;
         }
         #clock {
             text-align: center;
@@ -62,7 +62,7 @@
             margin: 0.5%;
             border-radius: 10px;
             cursor: pointer;
-            width: 30%; /* Definindo a largura dos botões */
+            width: 30%;
         }
     </style>
 </head>
@@ -82,17 +82,17 @@
                 <li class="HQ audiosource" data-src="https://streaming.brol.tech/jamendolounge">Vibe Song <span style="color:#109010">(Online)</span></li>
                 <li class="LQ audiosource" data-src="https://casthttps.suaradionanet.net/13805/stream">Reggae <span style="color:#109010">(Online)</span></li>
                 <li class="HQ audiosource" data-src="https://hirschmilch.de:7000/psytrance.mp3">Psy Trance <span style="color:#109010">(Online)</span></li>
-                <li class="LQ audiosource" data-src="http://94.130.113.214:8000/prog">Prog <span style="color:#109010">(Online)</span></li>
-                <li class="HQ audiosource" data-src="http://schranz.in:8000/stream/1/">HARDTECHNO <span style="color:#109010">(Online)</span></li>
-                <li class="LQ audiosource" data-src="http://116.202.241.212:7015/stream/1/">Classical <span style="color:#109010">(Online)</span></li>
-                <li class="HQ audiosource" data-src="http://gr02.cdnstream.com:8170/">Rap <span style="color:#109010">(Online)</span></li>
-                <li class="LQ audiosource" data-src="http://51.255.235.165:5068/stream/1/">Jazz <span style="color:#109010">(Online)</span></li>
-                <li class="HQ audiosource" data-src="http://108.178.13.122:8195/stream/1/">Hip-Hop <span style="color:#109010">(Online)</span></li>
-                <li class="LQ audiosource" data-src="http://5.35.214.196:8000/stream/1/">Indie <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="http://stream.zeno.fm/yfcaqdw1rxhvv">Trap BR <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="https://stream.technolovers.fm/dark-techno?ref=radiobrowser">HARDTECHNO <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="https://streamingradiolinks.xyz/8484/stream">Classical <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="https://stm1.xcast.com.br:12250/stream">Rap <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="https://solid48.streamupsolutions.com/proxy/hjphrupx/stream">Jazz <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="https://sensihiphop.radioca.st/stream">Hip-Hop <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="https://kathy.torontocast.com:2695/stream">Indie <span style="color:#109010">(Online)</span></li>
                 <li class="HQ audiosource" data-src="https://solid9.streamupsolutions.com/proxy/aceycmcz?mp=/stream">Reggae 2 <span style="color:#109010">(Online)</span></li>
-                <li class="LQ audiosource" data-src="https://sc.bce.lu/eldo">Top Music <span style="color:#109010">(Online)</span></li>
-                <li class="HQ audiosource" data-src="http://fr.ah.fm:8000/stream/1/">Trance 2 <span style="color:#109010">(Online)</span></li>
-                <li class="LQ audiosource" data-src="http://173.208.177.90:9322/stream/1/">HardRock <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="https://hs1.radiolibertymp.ro/listen/lmpphonk/stream.mp3">Pronk <span style="color:#109010">(Online)</span></li>
+                <li class="HQ audiosource" data-src="https://casthttps.suaradionanet.net/10502/stream">Trance 2 <span style="color:#109010">(Online)</span></li>
+                <li class="LQ audiosource" data-src="https://servidor.geracaoradios.com/listen/funk/stream">Funk <span style="color:#109010">(Online)</span></li>
             </ul>
         </div>
     </div>
@@ -103,16 +103,18 @@
             var minutes = now.getMinutes();
             var seconds = now.getSeconds();
             var day = now.getDate();
-            var month = now.getMonth() + 1; // January is 0
-            var year = now.getFullYear();
+            var month = now.getMonth() + 1; // Janeiro é 0
+
             if (hours < 10) hours = '0' + hours;
             if (minutes < 10) minutes = '0' + minutes;
             if (seconds < 10) seconds = '0' + seconds;
             if (day < 10) day = '0' + day;
             if (month < 10) month = '0' + month;
-            var timeString = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+
+            var timeString = day + '/' + month + ' ' + hours + ':' + minutes + ':' + seconds;
             document.getElementById('clock').innerHTML = timeString;
         }
+
         setInterval(updateClock, 1000);
         updateClock();
 
@@ -121,14 +123,17 @@
             $(this).addClass("selected");
             $("#audioElement").attr("src", $(this).data("src")).get(0).play();
         });
+
         $("#playButton").on('click', function() {
             $("#audioElement").get(0).play();
             $("#sourceList .audiosource.selected").removeClass('paused');
         });
+
         $("#pauseButton").on('click', function() {
             $("#audioElement").get(0).pause();
             $("#sourceList .audiosource.selected").addClass('paused');
         });
+
         $("#stopButton").on('click', function() {
             $("#audioElement").get(0).pause();
             $("#audioElement").get(0).src = "";
@@ -136,4 +141,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
